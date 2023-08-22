@@ -9,9 +9,11 @@ import plotly.express as px
 
 df = pandas.read_csv('data/unit05-data.csv')
 
-avg_incidence_by_year = df.groupby('year', as_index=False).agg({'Estimated incidence (all forms) per 100 000 population': 'mean'})
-print(avg_incidence_by_year)
-print(avg_incidence_by_year.columns)
+df_avg_incidence_by_year = df.groupby('year', as_index=False).agg({'Estimated incidence (all forms) per 100 000 population': 'mean'})
+# print(df_avg_incidence_by_year)
+
+df_singapore = df[df['country'] == 'Singapore']
+print(df_singapore)
 
 # Cleaning
 
@@ -19,7 +21,10 @@ print(avg_incidence_by_year.columns)
 
 # Graphical analysis/visualisation
 
-figure = px.bar(avg_incidence_by_year, x='year', y='Estimated incidence (all forms) per 100 000 population')
+figure = px.bar(df_avg_incidence_by_year, x='year', y='Estimated incidence (all forms) per 100 000 population')
+# figure.show()
+
+figure = px.line(df_singapore, x='year', y='Estimated incidence (all forms) per 100 000 population')
 figure.show()
 
 # Decision making/conclusions
